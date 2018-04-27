@@ -1,0 +1,39 @@
+diff --git a/src/Plugin/media/Source/Twitter.php b/src/Plugin/media/Source/Twitter.php
+index 38fdf83..e8a3e4c 100644
+--- a/src/Plugin/media/Source/Twitter.php
++++ b/src/Plugin/media/Source/Twitter.php
+@@ -6,7 +6,7 @@ use Drupal\Core\Config\ConfigFactoryInterface;
+ use Drupal\Core\Entity\EntityFieldManagerInterface;
+ use Drupal\Core\Entity\EntityTypeManagerInterface;
+ use Drupal\Core\Form\FormStateInterface;
+-use Drupal\Core\Logger\LoggerChannelInterface;
++use Psr\Log\LoggerInterface;
+ use Drupal\Core\Render\RendererInterface;
+ use Drupal\media\MediaInterface;
+ use Drupal\media\MediaSourceBase;
+@@ -44,9 +44,9 @@ class Twitter extends MediaSourceBase implements MediaSourceFieldConstraintsInte
+   protected $tweetFetcher;
+ 
+   /**
+-   * The logger channel.
++   * A logger instance.
+    *
+-   * @var \Drupal\Core\Logger\LoggerChannelInterface
++   * @var \Psr\Log\LoggerInterface
+    */
+   protected $logger;
+ 
+@@ -98,10 +98,10 @@ class Twitter extends MediaSourceBase implements MediaSourceFieldConstraintsInte
+    *   The renderer.
+    * @param \Drupal\media_entity_twitter\TweetFetcherInterface $tweet_fetcher
+    *   The tweet fetcher.
+-   * @param \Drupal\Core\Logger\LoggerChannelInterface $logger
+-   *   The logger channel.
++   * @param \Psr\Log\LoggerInterface $logger
++   *   A logger instance.
+    */
+-  public function __construct(array $configuration, $plugin_id, $plugin_definition, EntityTypeManagerInterface $entity_type_manager, EntityFieldManagerInterface $entity_field_manager, FieldTypePluginManagerInterface $field_type_manager, ConfigFactoryInterface $config_factory, RendererInterface $renderer, TweetFetcherInterface $tweet_fetcher, LoggerChannelInterface $logger) {
++  public function __construct(array $configuration, $plugin_id, $plugin_definition, EntityTypeManagerInterface $entity_type_manager, EntityFieldManagerInterface $entity_field_manager, FieldTypePluginManagerInterface $field_type_manager, ConfigFactoryInterface $config_factory, RendererInterface $renderer, TweetFetcherInterface $tweet_fetcher, LoggerInterface $logger) {
+     parent::__construct($configuration, $plugin_id, $plugin_definition, $entity_type_manager, $entity_field_manager, $field_type_manager, $config_factory);
+     $this->renderer = $renderer;
+     $this->tweetFetcher = $tweet_fetcher;
